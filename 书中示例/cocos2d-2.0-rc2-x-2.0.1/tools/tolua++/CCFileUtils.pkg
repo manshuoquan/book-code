@@ -1,0 +1,6 @@
+
+class CCFileUtils
+{
+    static CCFileUtils* sharedFileUtils();
+    std::string getWriteablePath();
+};

@@ -1,0 +1,31 @@
+/*
+typedef enum  
+{
+    kCCMenuStateWaiting,
+    kCCMenuStateTrackingTouch
+} tCCMenuState;
+
+enum {
+    //* priority used by the menu for the event handler
+    kCCMenuHandlerPriority = -128,
+};
+*/
+class CCMenu : public CCLayer
+{
+    void alignItemsVertically();
+    void alignItemsVerticallyWithPadding(float padding);
+    void alignItemsHorizontally();
+    void alignItemsHorizontallyWithPadding(float padding);
+    void alignItemsInColumns(unsigned int columns, va_list args);
+    void alignItemsInRows(unsigned int rows, va_list args);
+
+    void addChild(CCMenuItem* child, int zOrder = 0, int tag = -1);
+
+    void setOpacity(GLubyte opacity);
+    GLubyte getOpacity(void);
+    void setColor(ccColor3B color);
+    ccColor3B getColor(void);
+
+    static CCMenu* create();
+    static CCMenu* createWithItem(CCMenuItem* item);
+};

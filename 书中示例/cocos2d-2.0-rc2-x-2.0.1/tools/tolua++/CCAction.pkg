@@ -1,0 +1,230 @@
+
+enum {
+    kCCActionTagInvalid = -1,
+};
+
+class CCAction : public CCObject
+{
+    // bool isDone(void);
+    // CCNode* getTarget(void);
+    // void setTarget(CCNode *pTarget);
+    // CCNode* getOriginalTarget(void);
+    // void setOriginalTarget(CCNode *pOriginalTarget);
+    // int getTag(void);
+    // void setTag(int nTag);
+
+    // static CCAction* create();
+};
+
+class CCActionInterval : public CCAction
+{
+    // float getElapsed(void);
+    // void setAmplitudeRate(CGFloat amp);
+    // CGFloat getAmplitudeRate(void);
+};
+
+class CCFiniteTimeAction : public CCActionInterval
+{
+    // float getDuration(void);
+    // void setDuration(float duration);
+    // CCFiniteTimeAction* reverse(void);
+};
+
+// CCActionInterval
+class CCSpeed : public CCAction
+{
+    float getSpeed(void);
+    void setSpeed(float fSpeed);
+    CCAction* reverse(void);
+
+    static CCSpeed* create(CCActionInterval *pAction, float fRate);
+};
+
+class CCFollow : public CCAction
+{
+    bool isBoundarySet(void);
+    void setBoudarySet(bool bValue);
+
+    static CCFollow* create(CCNode *pFollowedNode);
+    static CCFollow* create(CCNode *pFollowedNode, CCRect rect);
+};
+
+class CCSequence : public CCActionInterval
+{
+    static CCFiniteTimeAction* create(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo);
+    static CCFiniteTimeAction* create(CCArray *actions);
+};
+
+class CCRepeat : public CCActionInterval
+{
+    static CCRepeat* create(CCActionInterval *pAction, unsigned int times);
+};
+
+class CCRepeatForever : public CCActionInterval
+{
+    static CCRepeatForever* create(CCActionInterval *pAction);
+};
+
+class CCSpawn : public CCActionInterval
+{
+    static CCFiniteTimeAction* create(CCArray *actions);
+    static CCSpawn* create(CCFiniteTimeAction *pAction1, CCFiniteTimeAction *pAction2);
+};
+
+class CCRotateTo : public CCActionInterval
+{
+    static CCRotateTo* create(float duration, float fDeltaAngle);
+};
+
+class CCRotateBy : public CCActionInterval
+{
+    static CCRotateBy* create(float duration, float fDeltaAngle);
+};
+
+class CCMoveTo : public CCActionInterval
+{
+    static CCMoveTo* create(float duration, CCPoint position);
+};
+
+class CCMoveBy : public CCActionInterval
+{
+    static CCMoveBy* create(float duration, CCPoint position);
+};
+
+class CCSkewTo : public CCActionInterval
+{
+    static CCSkewTo* create(float t, float sx, float sy);
+};
+
+class CCSkewBy : public CCActionInterval
+{
+    static CCSkewBy* create(float t, float deltaSkewX, float deltaSkewY);
+};
+
+class CCJumpBy : public CCActionInterval
+{
+    static CCJumpBy* create(float duration, CCPoint position, float height, int jumps);
+};
+
+class CCJumpTo : public CCActionInterval
+{
+    static CCJumpTo* create(float duration, CCPoint position, float height, int jumps);
+};
+
+typedef struct _ccBezierConfig {
+    CCPoint endPosition;
+    CCPoint controlPoint_1;
+    CCPoint controlPoint_2;
+} ccBezierConfig;
+
+class CCBezierBy : public CCActionInterval
+{
+    static CCBezierBy* create(float t, ccBezierConfig c);
+};
+
+class CCBezierTo : public CCActionInterval
+{
+    static CCBezierTo* create(float t, ccBezierConfig c);
+};
+
+class CCScaleTo : public CCActionInterval
+{
+    static CCScaleTo* create(float duration, float s);
+    static CCScaleTo* create(float duration, float sx, float sy);
+};
+
+class CCScaleBy : public CCActionInterval
+{
+    static CCScaleBy* create(float duration, float s);
+    static CCScaleBy* create(float duration, float sx, float sy);
+};
+
+class CCBlink : public CCActionInterval
+{
+    static CCBlink* create(float duration, unsigned int uBlinks);
+};
+
+class CCFadeIn : public CCActionInterval
+{
+    static CCFadeIn* create(float d);
+};
+
+class CCFadeOut : public CCActionInterval
+{
+    static CCFadeOut* create(float d);
+};
+
+class CCFadeTo : public CCActionInterval
+{
+    static CCFadeTo* create(float duration, GLubyte opacity);
+};
+
+class CCTintTo : public CCActionInterval
+{
+    static CCTintTo* create(float duration, GLubyte red, GLubyte green, GLubyte blue);
+};
+
+class CCTintBy : public CCActionInterval
+{
+    static CCTintBy* create(float duration, GLshort deltaRed, GLshort deltaGreen, GLshort deltaBlue);
+};
+
+class CCDelayTime : public CCActionInterval
+{
+    static CCDelayTime* create(float d);
+};
+
+class CCReverseTime : public CCActionInterval
+{
+    static CCReverseTime* create(CCFiniteTimeAction *pAction);
+};
+
+class CCAnimate : public CCActionInterval
+{
+    CCAnimation* getAnimation(void);
+    void setAnimation(CCAnimation *pAnimation);
+
+    static CCAction* create(CCAnimation *pAnimation);
+};
+
+class CCProgressTo : public CCAction
+{
+    static CCAction* create(float duration, float fPercent);
+};
+
+class CCProgressFromTo : public CCAction
+{
+    static CCAction* create(float duration, float fFromPercentage, float fToPercentage);
+};
+
+
+// CCActionInstant
+class CCShow : public CCAction
+{
+    static CCAction* create();
+};
+
+class CCHide : public CCAction
+{
+    static CCAction* create();
+};
+
+class CCToggleVisibility : public CCAction
+{
+    static CCAction* create();
+};
+
+class CCFlipX : public CCAction
+{
+    static CCAction* create(bool x);
+};
+
+class CCFlipY : public CCAction
+{
+    static CCAction* create(bool y);
+};
+
+class CCPlace : public CCAction //<NSCopying>
+{
+    static CCAction* create(CCPoint pos);
+};

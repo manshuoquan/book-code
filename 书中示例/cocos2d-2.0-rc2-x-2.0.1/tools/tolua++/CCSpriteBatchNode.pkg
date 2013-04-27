@@ -1,0 +1,27 @@
+
+class CCSpriteBatchNode : public CCNode
+{
+    CCTextureAtlas* getTextureAtlas(void);
+    void setTextureAtlas(CCTextureAtlas* textureAtlas);
+    CCArray* getDescendants(void);
+
+    void increaseAtlasCapacity();
+    void removeChildAtIndex(unsigned int index, bool doCleanup);
+    void insertChild(CCSprite *child, unsigned int index);
+    void removeSpriteFromAtlas(CCSprite *sprite);
+
+    unsigned int rebuildIndexInOrder(CCSprite *parent, unsigned int index);
+    unsigned int highestAtlasIndexInChild(CCSprite *sprite);
+    unsigned int lowestAtlasIndexInChild(CCSprite *sprite);
+    unsigned int atlasIndexForChild(CCSprite *sprite, int z);
+
+    void setTexture(CCTexture2D *texture);
+    CCTexture2D* getTexture(void);
+    void setBlendFunc(ccBlendFunc blendFunc);
+    ccBlendFunc getBlendFunc(void);
+
+    static CCSpriteBatchNode* create(CCTexture2D *tex);
+    static CCSpriteBatchNode* create(CCTexture2D* tex, unsigned int capacity);
+    static CCSpriteBatchNode* create(const char* fileImage);
+    static CCSpriteBatchNode* create(const char* fileImage, unsigned int capacity);
+};

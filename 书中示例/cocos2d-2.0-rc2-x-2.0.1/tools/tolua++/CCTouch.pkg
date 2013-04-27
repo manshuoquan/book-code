@@ -1,0 +1,18 @@
+
+enum {
+    CCTOUCHBEGAN,
+    CCTOUCHMOVED,
+    CCTOUCHENDED,
+    CCTOUCHCANCELLED,
+};
+
+class CCTouch : public CCObject
+{
+    CCPoint locationInView();
+    CCPoint previousLocationInView();
+    int getID();
+};
+
+class CCEvent : public CCObject
+{
+};

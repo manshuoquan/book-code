@@ -1,0 +1,34 @@
+
+class CCDirector : public CCObject
+{
+    CCScene* getRunningScene(void);
+
+    double getAnimationInterval(void);
+
+    bool isDisplayStats(void);
+    void setDisplayStats(bool bDisplayFPS);
+
+    bool isPaused(void);
+    unsigned int getTotalFrames(void);
+
+    CCSize getWinSize(void);
+    CCSize getWinSizeInPixels(void);
+
+    CCPoint convertToGL(CCPoint obPoint);
+    CCPoint convertToUI(CCPoint obPoint);
+
+    void runWithScene(CCScene *pScene);
+    void pushScene(CCScene *pScene);
+    void popScene(void);
+    void replaceScene(CCScene *pScene);
+
+    CCFloat getContentScaleFactor(void);
+
+    CCScheduler* getScheduler();
+    CCActionManager* getActionManager();
+    CCTouchDispatcher* getTouchDispatcher();
+    CCKeypadDispatcher* getKeypadDispatcher();
+    CCAccelerometer* getAccelerometer();
+
+    static CCDirector* sharedDirector(void);
+};

@@ -1,0 +1,17 @@
+
+class CCLabelBMFont : public CCNode
+{
+    void setString(const char *label);
+    const char* getString(void);
+
+    void setColor(const ccColor3B& color);
+    const ccColor3B& getColor(void);
+
+    GLubyte getOpacity(void);
+    void setOpacity(GLubyte opacity);
+
+    tolua_property__CCOpacity   GLubyte opacity;
+
+    static void purgeCachedData();
+    static CCLabelBMFont * create(const char *str, const char *fntFile);
+};

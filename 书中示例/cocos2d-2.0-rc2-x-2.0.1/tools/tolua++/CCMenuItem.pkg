@@ -1,0 +1,80 @@
+
+class CCMenuItem : public CCNode
+{
+    CCRect rect();
+    void activate();
+    void selected();
+    void unselected();
+    void setEnabled(bool enabled);
+    bool isEnabled();
+    bool isSelected();
+
+    void registerScriptHandler(LUA_FUNCTION funcID);
+    void unregisterScriptHandler(void);
+};
+
+class CCMenuItemLabel : public CCMenuItem
+{
+    void setString(const char*  label);
+
+    void setOpacity(GLubyte opacity);
+    GLubyte getOpacity();
+    void setColor(ccColor3B color);
+    ccColor3B getColor();
+
+    static CCMenuItemLabel* create(CCNode* label);
+};
+
+class CCMenuItemAtlasFont : public CCMenuItem
+{
+    static CCMenuItemAtlasFont* create(const char* value,
+                                               const char* charMapFile,
+                                               int itemWidth,
+                                               int itemHeight,
+                                               char startCharMap);
+};
+
+class CCMenuItemFont : public CCMenuItem
+{
+    static void setFontSize(int s);
+    static int fontSize();
+    static void setFontName(const char* name);
+    static const char* fontName();
+    static CCMenuItemFont * create(const char* value);
+};
+
+class CCMenuItemSprite : public CCMenuItem
+{
+    void setColor(ccColor3B color);
+    ccColor3B getColor();
+    void setOpacity(GLubyte opacity);
+    GLubyte getOpacity();
+
+    static CCMenuItemSprite * create(CCNode* normalSprite,
+                                                   CCNode* selectedSprite);
+    static CCMenuItemSprite * create(CCNode* normalSprite,
+                                                   CCNode* selectedSprite,
+                                                   CCNode* disabledSprite);
+};
+
+class CCMenuItemImage : public CCMenuItem
+{
+    void setColor(ccColor3B color);
+    ccColor3B getColor();
+    void setOpacity(GLubyte opacity);
+    GLubyte getOpacity();
+
+    static CCMenuItemImage* create(const char* normalImage,
+                                                const char* selectedImage);
+    static CCMenuItemImage* create(const char* normalImage,
+                                                const char* selectedImage,
+                                                const char* disabledImage);
+};
+
+class CCMenuItemToggle : public CCMenuItem
+{
+    void addSubItem(CCMenuItem *item);
+    CCMenuItem* selectedItem();
+
+    static CCMenuItemToggle* create(CCMenuItem *item);
+};

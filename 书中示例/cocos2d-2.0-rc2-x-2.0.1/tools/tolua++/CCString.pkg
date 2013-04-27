@@ -1,0 +1,18 @@
+
+class CCString : public CCObject
+{
+    int intValue() const;
+    unsigned int uintValue() const;
+    float floatValue() const;
+    double doubleValue() const;
+    bool boolValue() const;
+    const char* getCString() const;
+    unsigned int length() const;
+
+    bool isEqual(const CCObject* pObject);
+
+    static CCString* create(const char* pStr);
+    static CCString* create(unsigned char* pData, unsigned long nLen);
+    static CCString* createWithContentsOfFile(const char* pszFileName);
+};
+
