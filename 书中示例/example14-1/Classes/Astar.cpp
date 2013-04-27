@@ -179,31 +179,17 @@ void Astar::removefromopen()
 	open->replaceObjectAtIndex(1,open->lastObject(),true);
 	open->removeLastObject();
 	last = open->count() - 1;
-    //堆排序
-	int head = 1;
-	while((head * 2 + 1) <= last){
-	   int child1 = head * 2;
-	   int child2 = head * 2 + 1;
-	   int childmin = (((AstarItem *)open->objectAtIndex(child1))->getf() < ((AstarItem *)open->objectAtIndex(child2))->getf() ? child1:child2);
-	   if(((AstarItem *)open->objectAtIndex(head))->getf() <= ((AstarItem *)open->objectAtIndex(childmin))->getf()){
-	      break;
-	   }
-       //AstarItem * temp = (AstarItem *)open->objectAtIndex(childmin);
-	   open->replaceObjectAtIndex(childmin,open->objectAtIndex(head),false);
-       //temp->release();
-	}
 }
 void Astar::resetSort(int last)
 {
     //根据步长排序，堆排序
 	while(last > 1){
-	   int half = last/2;
-	   if(((AstarItem *)open->objectAtIndex(half))->getf() <= ((AstarItem *)open->objectAtIndex(last))->getf())
+	   int half = last / 2;
+        
+	   if(((AstarItem *)open->objectAtIndex(half))->getf() >= ((AstarItem *)open->objectAtIndex(last))->getf())
 		   break;
-	   AstarItem * temp = (AstarItem *)open->objectAtIndex(last);
-	   open->replaceObjectAtIndex(last,open->objectAtIndex(half),false);
-	   open->replaceObjectAtIndex(half,temp,true);
-	   temp->release();
+	   open->exchangeObjectAtIndex(half,last);
+       last = half;
 	}
 }
 int Astar::getG(int col,int row,int id)
