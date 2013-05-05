@@ -47,16 +47,32 @@ void HelloWorld::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     
     CCPoint m_tBeginPos = touch->locationInView();	
     m_tBeginPos = CCDirector::sharedDirector()->convertToGL( m_tBeginPos );
-    
      CCTMXTiledMap* map = (CCTMXTiledMap*) getChildByTag(1);
      CCPoint mapp = map->getPosition();
-     CCPoint aimmapindex = convertto2d(m_tBeginPos.x - mapp.x,m_tBeginPos.y - mapp.y);
+     CCPoint aimmapindex = convertto2dSimple(m_tBeginPos.x - mapp.x,m_tBeginPos.y - mapp.y);
+     //CCLog("x->%d",aimmapindex.x);
+     //CCLog("y->%d",aimmapindex.y);
      if(aimmapindex.x < 0 || aimmapindex.y < 0 || aimmapindex.x >= map->getMapSize().width || aimmapindex.y >= map->getMapSize().height)
      {
      return;
      }
      CCTMXLayer* layer = map->layerNamed("grass");
      layer->setTileGID(4,aimmapindex);
+}
+CCPoint HelloWorld::convertto2dSimple(float x,float y){
+    CCTMXTiledMap* map = (CCTMXTiledMap*) getChildByTag(1);
+	int mapWidth = map->getMapSize().width * map->getTileSize().width;
+	int mapHeight = map->getMapSize().height * map->getTileSize().height;
+    double mystatic5 = sqrt(5.0);
+    int tileWidthratio = 2;
+    int tileHeightratio = 1;
+    int deltaX = x - mapWidth/2;
+    int deltaY = y - mapHeight;
+    //CCLog("deltaX->%d",deltaX);
+    //CCLog("deltaY->%d",deltaY);
+    int d2x = (tileWidthratio * deltaY + tileHeightratio * deltaX) / (tileWidthratio * tileHeightratio * map->getTileSize().width * mystatic5 / 2) + 13;
+    int d2y = (tileWidthratio * deltaY - tileHeightratio * deltaX) / (tileWidthratio * tileHeightratio * map->getTileSize().width * mystatic5 / 2) + 13;
+    return ccp(d2x,d2y);
 }
 CCPoint HelloWorld::convertto2d(float x,float y){
 	CCTMXTiledMap* map = (CCTMXTiledMap*) getChildByTag(1);

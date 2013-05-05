@@ -15,7 +15,7 @@ public:
     static cocos2d::CCScene* scene();
     
     CCPoint convertto2d(float x,float y);
-    
+    CCPoint convertto2dSimple(float x,float y);
     void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
     
     LAYER_CREATE_FUNC(HelloWorld);
