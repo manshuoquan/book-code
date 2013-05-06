@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'example_11_1' target in the 'example_11_1' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+#endif
