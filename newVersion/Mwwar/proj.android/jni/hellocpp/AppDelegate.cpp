@@ -11,6 +11,8 @@
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "GameMenuScene.h"
+#include "GameAboutScene.h"
+
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -29,6 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
+    CCEGLView::sharedOpenGLView()->setDesignResolutionSize(320,480, kResolutionNoBorder);
     // turn on display FPS
     pDirector->setDisplayStats(true);
 
@@ -40,7 +43,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // run
     pDirector->runWithScene(pScene);
-
+    
     return true;
 }
 

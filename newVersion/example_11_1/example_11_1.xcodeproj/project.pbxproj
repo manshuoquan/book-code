@@ -2640,6 +2640,7 @@
 				4A55B1DF1738089A00D83D51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

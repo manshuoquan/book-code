@@ -232,7 +232,7 @@ obj/local/armeabi/objs/game_shared/./hellocpp/AppDelegate.o: \
  /Users/manshuoquan/documents/cocos2d-2.1rc0-x-2.1.3/Mwwar/proj.android/../../cocos2dx/support/data_support/uthash.h \
  /Users/manshuoquan/documents/cocos2d-2.1rc0-x-2.1.3/Mwwar/proj.android/../../CocosDenshion/android/../include/SimpleAudioEngine.h \
  /Users/manshuoquan/documents/cocos2d-2.1rc0-x-2.1.3/Mwwar/proj.android/../../CocosDenshion/android/../include/Export.h \
- jni/./hellocpp/GameMenuScene.h
+ jni/./hellocpp/GameMenuScene.h jni/./hellocpp/GameAboutScene.h
 
 jni/./hellocpp/AppDelegate.h:
 
@@ -701,3 +701,5 @@ jni/./hellocpp/AppDelegate.h:
 /Users/manshuoquan/documents/cocos2d-2.1rc0-x-2.1.3/Mwwar/proj.android/../../CocosDenshion/android/../include/Export.h:
 
 jni/./hellocpp/GameMenuScene.h:
+
+jni/./hellocpp/GameAboutScene.h:

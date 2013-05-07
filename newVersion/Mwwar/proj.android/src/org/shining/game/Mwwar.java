@@ -26,7 +26,11 @@ package org.shining.game;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 public class Mwwar extends Cocos2dxActivity{
 
@@ -40,7 +44,38 @@ public class Mwwar extends Cocos2dxActivity{
     	
     	return glSurfaceView;
     }
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		Toast.makeText(Mwwar.this, "Home键"+ keyCode,Toast.LENGTH_SHORT).show();
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			new AlertDialog.Builder(this) 
+			.setTitle("确认")
+			.setMessage("确定退出吗？")
+			.setPositiveButton("是", new DialogInterface.OnClickListener() {  
+                public void onClick(DialogInterface dialog, int which) {  
+                	Mwwar.this.finish(); 
+                }  
+             })
+			.setNegativeButton("否", null)
+			.show();
+		}else if(keyCode == KeyEvent.KEYCODE_HOME) {
+			Toast.makeText(Mwwar.this, "Home键",Toast.LENGTH_SHORT).show();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
     static {
          System.loadLibrary("game");
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+         outState.putString("lastPath", "/sdcard/android/game/test");
+    }
+
+
+    @Override 
+    public void onRestoreInstanceState(Bundle savedInstanceState) { 
+         super.onRestoreInstanceState(savedInstanceState);
+
+         String cwjString = savedInstanceState.getString("lastPath"); 
     }
 }
