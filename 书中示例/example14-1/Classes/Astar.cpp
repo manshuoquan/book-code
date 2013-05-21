@@ -186,7 +186,7 @@ void Astar::resetSort(int last)
 	while(last > 1){
 	   int half = last / 2;
         
-	   if(((AstarItem *)open->objectAtIndex(half))->getf() >= ((AstarItem *)open->objectAtIndex(last))->getf())
+	   if(((AstarItem *)open->objectAtIndex(half))->getf() <= ((AstarItem *)open->objectAtIndex(last))->getf())
 		   break;
 	   open->exchangeObjectAtIndex(half,last);
        last = half;
