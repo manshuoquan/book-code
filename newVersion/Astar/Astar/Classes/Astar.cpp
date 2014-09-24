@@ -36,7 +36,9 @@ CCArray *Astar::findPath(int curX, int curY, int aimX, int aimY, CCTMXTiledMap* 
 	while(open->count() > 1){
 	   fromopentoclose();//open和close列表管理
 	   int fatherid = close->count() - 1;
-	   if(abs(aimCol - ((AstarItem *)close->objectAtIndex(fatherid))->getcol()) <= 1 && abs(aimRow - ((AstarItem *)close->objectAtIndex(fatherid))->getrow()) <= 1){
+       int coldelta = abs(aimCol - ((AstarItem *)close->objectAtIndex(fatherid))->getcol());
+       int rowdelta = abs(aimRow - ((AstarItem *)close->objectAtIndex(fatherid))->getrow());
+	   if(coldelta <= 1 && rowdelta <= 1){
 		   getpath();
 		   break;
 	   }else{
@@ -48,7 +50,10 @@ CCArray *Astar::findPath(int curX, int curY, int aimX, int aimY, CCTMXTiledMap* 
 	close->removeAllObjects();
     //获得路径
 	if(path->count() == 0){
-	   return NULL;
+       AstarItem * temp = new AstarItem();
+       temp->setpos(aimCol,aimRow);
+       path->addObject(temp);
+	   return path;
 	}else{
 		if(((AstarItem *)path->lastObject())->getcol() != aimCol || ((AstarItem *)path->lastObject())->getrow() != aimRow){
 		   AstarItem * temp = new AstarItem();
@@ -137,7 +142,7 @@ bool Astar::checkOpen(int col,int row,int id)
 bool Astar::checkmap(int col,int row)
 {
     //检查地图中是否有碰撞
-   if(abs(aimCol - col) > 1 || abs(aimRow - row) > 1){
+   //if(abs(aimCol - col) > 1 || abs(aimRow - row) > 1){
 	  CCTMXLayer* layer = map->layerNamed("grass");
       int tilegid = layer->tileGIDAt(ccp(col,row));
 	  CCDictionary *tiledic = map->propertiesForGID(tilegid);
@@ -146,12 +151,20 @@ bool Astar::checkmap(int col,int row)
 	  if(mv == 1){
 	     return false;
 	  } 
-   }
+   //}
    return true;
 }
 void Astar::getpath()
 {
     //从整个close数组中找出路径
+    curCol = aimCol;
+	curRow = aimRow;
+    if(close->count() == 0){
+       AstarItem * temp = new AstarItem();
+       temp->setpos(aimCol,aimRow);
+       path->addObject(temp);
+       return;
+    }
 	if(path->count() == 0){
 		path->addObject(close->objectAtIndex(close->count() - 1));
 	}else{
@@ -163,8 +176,6 @@ void Astar::getpath()
 		}
 		path->insertObject(close->objectAtIndex(((AstarItem *)path->objectAtIndex(0))->getfid()),0);
 	}
-	curCol = aimCol;
-	curRow = aimRow;
 }
 void Astar::fromopentoclose()
 {

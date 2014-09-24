@@ -92,6 +92,7 @@ void MapScene::update(float dt)
 	CCPoint mapindex = convertto2d(herop.x,herop.y);
     //根据路径移动
 	if(stepindex >= 1){
+        int count = path->count();
 	   if(smallstepindex == 0){
 		   int ncol = ((AstarItem *)path->objectAtIndex(stepindex))->getcol();
 		   int nrow = ((AstarItem *)path->objectAtIndex(stepindex))->getrow();
@@ -114,7 +115,25 @@ void MapScene::update(float dt)
 			      vmove = -1;
 			   }
 		   }else{
-               vmove = -1;
+               if(prow < nrow){
+                   if(pcol < ncol){
+                       vmove = 6;
+                   }else if(pcol > ncol){
+                       vmove = 5;
+                   }else{
+                       vmove = -1;
+                   }
+			   }else if(prow > nrow){
+                   if(pcol < ncol){
+                       vmove = 4;
+                   }else if(pcol > ncol){
+                       vmove = 7;
+                   }else{
+                       vmove = -1;
+                   }
+			   }else{
+                   vmove = -1;
+			   }
 		   }
 	   }
 	   if(vmove == 0){
@@ -130,13 +149,13 @@ void MapScene::update(float dt)
 	      herop.x -= 1;
 	      herop.y -= 0.5;
 	   }else if(vmove == 4){
-	      herop.x += 1;
+	      herop.x += 2;
 	   }else if(vmove == 5){
-	      herop.x -= 1;
+	      herop.x -= 2;
 	   }else if(vmove == 6){
-	      herop.y += 0.5;
+	      herop.y -= 1;
 	   }else if(vmove == 7){
-	      herop.y -= 0.5;
+	      herop.y += 1;
 	   }
 	   smallstepindex ++;
 	   if(smallstepindex >= 32){

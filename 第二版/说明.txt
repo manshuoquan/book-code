@@ -1,0 +1,2 @@
+除了example17和example20，其他都要新建cocos2d-x新工程，并把cocos2d文件夹复制到MyCppGame目录下，采用cocos2d-x 3.0版本
+example20 需要新建lua项目并把frameworks下的cocos2d-x文件夹复制进来
